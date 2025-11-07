@@ -51,7 +51,7 @@ function AppContent() {
                     <Route path="/login" element={<LoginPage setUser={setUser} />} />
                     <Route path="/signup" element={<SignupPage setUser={setUser} />} />
                     <Route path="/chats" element={<ChatPage />} />
-                    <Route path="/profile" element={<ProfilePage user={user} onLogout={handleLogout} />} />
+                    <Route path="/profile" element={<ProfilePage onLogout={handleLogout} />} />
                     <Route path="*" element={<Navigate to="/" replace />} />
                 </Routes>
             </main>
