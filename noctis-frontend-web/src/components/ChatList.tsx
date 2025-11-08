@@ -92,7 +92,7 @@ export default function ChatList({ onSelect }: { onSelect: (c: any) => void }) {
                                         e.stopPropagation();
                                         if (window.confirm("Are you sure you want to delete this conversation?")) {
                                             try {
-                                                await axios.delete(`http://localhost:5000/api/conversations/${c._id}`, { withCredentials: true });
+                                                await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/conversations/${c._id}`, { withCredentials: true });
                                                 setConvos(prev => prev.filter(conv => conv._id !== c._id));
                                             } catch (err) {
                                                 console.error("Failed to delete conversation:", err);
