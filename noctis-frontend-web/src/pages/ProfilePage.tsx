@@ -2,6 +2,7 @@ import {useState, useEffect, useRef} from "react";
 import { toast } from "react-hot-toast";
 import { Loader2, Pencil } from "lucide-react";
 import axios from "axios";
+import.meta.env.VITE_BACKEND_URL
 
 const ProfilePage = ({ onLogout }: { onLogout: () => void }) => {
     const [user, setUser] = useState<any>(null);
@@ -43,7 +44,7 @@ const ProfilePage = ({ onLogout }: { onLogout: () => void }) => {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const res = await axios.get("http://localhost:5000/api/auth/me", {
+                const res = await axios.get(`${process.env.VITE_BACKEND_URL}/api/auth/me`, {
                     withCredentials: true,
                 });
                 setUser(res.data);
@@ -92,7 +93,7 @@ const ProfilePage = ({ onLogout }: { onLogout: () => void }) => {
             }
 
             const res = await axios.put(
-                "http://localhost:5000/api/users/profile",
+                `${process.env.VITE_BACKEND_URL}/api/users/profile`,
                 payload,
                 { withCredentials: true }
             );

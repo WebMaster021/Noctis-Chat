@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import UserProfileModal from "../modals/UserProfileModal";
+import.meta.env.VITE_BACKEND_URL
 
 export default function ChatList({ onSelect }: { onSelect: (c: any) => void }) {
     const [convos, setConvos] = useState<any[]>([]);
@@ -13,7 +14,7 @@ export default function ChatList({ onSelect }: { onSelect: (c: any) => void }) {
     const viewProfile = async (user: any) => {
         try {
             const { data } = await axios.get(
-                `http://localhost:5000/api/users/${user._id}/public`,
+                `${process.env.VITE_BACKEND_URL}/api/users/${user._id}/public`,
                 { withCredentials: true }
             );
             setSelectedUser(data);
@@ -26,13 +27,13 @@ export default function ChatList({ onSelect }: { onSelect: (c: any) => void }) {
     useEffect(() => {
         const load = async () => {
             try {
-                const meRes = await axios.get("http://localhost:5000/api/auth/me", { withCredentials: true });
+                const meRes = await axios.get(`${process.env.VITE_BACKEND_URL}/api/auth/me`, { withCredentials: true });
                 setUserId(meRes.data.id);
 
-                const convosRes = await axios.get("http://localhost:5000/api/conversations", { withCredentials: true });
+                const convosRes = await axios.get(`${process.env.VITE_BACKEND_URL}/api/conversations`, { withCredentials: true });
                 setConvos(convosRes.data);
 
-                const usersRes = await axios.get("http://localhost:5000/api/users", { withCredentials: true });
+                const usersRes = await axios.get(`${process.env.VITE_BACKEND_URL}/api/users`, { withCredentials: true });
                 setUsers(usersRes.data);
             } catch (err) {
                 console.error("Failed to fetch data:", err);
@@ -46,11 +47,11 @@ export default function ChatList({ onSelect }: { onSelect: (c: any) => void }) {
     const startConversation = async (user: any) => {
         try {
             const res = await axios.post(
-                "http://localhost:5000/api/conversations",
+                `${process.env.VITE_BACKEND_URL}/api/conversations`,
                 { otherUserID: user._id },
                 { withCredentials: true }
             );
-            const convosRes = await axios.get("http://localhost:5000/api/conversations", { withCredentials: true });
+            const convosRes = await axios.get(`${process.env.VITE_BACKEND_URL}/api/conversations`, { withCredentials: true });
             setConvos(convosRes.data);
             onSelect(res.data);
         } catch (err) {

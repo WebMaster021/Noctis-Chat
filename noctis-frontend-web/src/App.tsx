@@ -7,6 +7,7 @@ import SignupPage from "./pages/SignupPage";
 import ProfilePage from "./pages/ProfilePage";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import.meta.env.VITE_BACKEND_URL
 
 function AppContent() {
     const navigate = useNavigate();
@@ -16,7 +17,7 @@ function AppContent() {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const res = await axios.get("http://localhost:5000/api/auth/me", {
+                const res = await axios.get(`${process.env.VITE_BACKEND_URL}/api/auth/me`, {
                     withCredentials: true,
                 });
                 setUser(res.data);
@@ -31,7 +32,7 @@ function AppContent() {
 
     const handleLogout = async () => {
         try {
-            await axios.post("http://localhost:5000/api/auth/logout", {}, { withCredentials: true });
+            await axios.post(`${process.env.VITE_BACKEND_URL}/api/auth/logout`, {}, { withCredentials: true });
         } catch (err) {
             console.error(err);
         } finally {

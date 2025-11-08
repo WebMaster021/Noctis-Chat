@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { connectSocket } from "../lib/socket";
+import.meta.env.VITE_BACKEND_URL
 
 export default function ChatWindow({ conversation }: { conversation: any }) {
     const [messages, setMessages] = useState<any[]>([]);
@@ -25,7 +26,7 @@ export default function ChatWindow({ conversation }: { conversation: any }) {
         const loadChat = async () => {
             try {
                 const msgRes = await axios.get(
-                    `http://localhost:5000/api/conversations/${conversation._id}/messages`,
+                    `${process.env.VITE_BACKEND_URL}/api/conversations/${conversation._id}/messages`,
                     { withCredentials: true }
                 );
                 setMessages(msgRes.data);

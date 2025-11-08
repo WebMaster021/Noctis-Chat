@@ -4,7 +4,7 @@ let socket: Socket | null = null;
 
 export function connectSocket() {
     if (socket) return socket;
-    socket = io("http://localhost:5000", {
+    socket = io(import.meta.env.VITE_BACKEND_URL, {
         withCredentials: true,
         autoConnect: true,
     });
