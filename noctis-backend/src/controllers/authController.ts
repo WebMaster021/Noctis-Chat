@@ -78,8 +78,8 @@ export const registerUser = async (req: Request, res: Response) => {
         const jwtToken = generateToken(newUser._id.toString());
         res.cookie("token", jwtToken, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            sameSite: "lax",
+                secure: process.env.NODE_ENV === "production",
+                sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
             maxAge: 1000 * 60 * 60 * 24 * 7,
         });
 
