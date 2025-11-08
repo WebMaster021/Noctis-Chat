@@ -8,7 +8,7 @@ import cookie from "cookie";
 export function initSocket(server: http.Server) {
     const io = new Server(server, {
         cors: {
-            origin: "http://localhost:5173",
+            origin: process.env.FRONTEND_URL,
             methods: ["GET", "POST"],
             credentials: true,
         },
