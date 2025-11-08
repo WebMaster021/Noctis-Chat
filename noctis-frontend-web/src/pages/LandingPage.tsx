@@ -33,7 +33,7 @@ const LandingPage = () => {
             </section>
 
             {/* Rules Section */}
-            <section className="max-w-6xl mx-auto mt-16 px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 text-center">
+            <section className="max-w-6xl mx-auto mt-10 px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 text-center">
                 <div className="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 transition-all duration-300 shadow-lg hover:shadow-red-900/20">
                     <h4 className="text-lg sm:text-xl font-subheading font-semibold text-red-500 mb-2">
                         Respect the Night

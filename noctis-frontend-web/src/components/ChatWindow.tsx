@@ -35,12 +35,23 @@ export default function ChatWindow({ conversation }: { conversation: any }) {
                 socket.emit("join", conversation._id);
 
                 socket.on("message:receive", (msg: any) => {
-                    setMessages(prev => (prev.some(m => m._id === msg._id) ? prev : [...prev, msg]));
+                    setMessages((prev) => (prev.some((m) => m._id === msg._id) ? prev : [...prev, msg]));
                 });
+
+                let typingTimeout: NodeJS.Timeout;
 
                 socket.on("typing", ({ userId, isTyping }: any) => {
                     const other = conversation.participants.find((p: any) => p._id === userId);
-                    setTypingUser(isTyping ? other?.name || "Someone" : null);
+                    if (isTyping) {
+                        setTypingUser(other?.name || "Someone");
+
+                        clearTimeout(typingTimeout);
+                        typingTimeout = setTimeout(() => {
+                            setTypingUser(null);
+                        }, 3000);
+                    } else {
+                        setTypingUser(null);
+                    }
                 });
             } catch (err) {
                 console.error("Failed to load chat:", err);
@@ -55,6 +66,7 @@ export default function ChatWindow({ conversation }: { conversation: any }) {
             socketRef.current?.off("typing");
         };
     }, [conversation._id]);
+
 
     const sendMessage = () => {
         if (!text.trim()) return;
