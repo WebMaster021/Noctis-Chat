@@ -118,7 +118,7 @@ function LoginPage({ setUser }: LoginPageProps) {
                     <hr className="flex-1 border-gray-700" />
                 </div>
 
-                <div className=" justify-center">
+                <div className="flex items-center justify-center">
                     <GoogleLogin
                         onSuccess={async (credentialResponse) => {
                             try {
