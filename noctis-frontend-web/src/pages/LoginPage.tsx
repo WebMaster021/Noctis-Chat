@@ -2,7 +2,6 @@ import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import {GoogleLogin} from "@react-oauth/google";
-import.meta.env.VITE_BACKEND_URL
 
 axios.defaults.withCredentials = true;
 
@@ -37,7 +36,7 @@ function LoginPage({ setUser }: LoginPageProps) {
 
         try {
             const res = await axios.post(
-                `${process.env.VITE_BACKEND_URL}/api/auth/login`,
+                `${import.meta.env.VITE_BACKEND_URL}/api/auth/login`,
                 { email, password },
                 { withCredentials: true }
             );
@@ -126,7 +125,7 @@ function LoginPage({ setUser }: LoginPageProps) {
                                 setLoading(true);
                                 const idToken = credentialResponse.credential;
                                 const res = await axios.post(
-                                    `${process.env.VITE_BACKEND_URL}/api/auth/google`,
+                                    `${import.meta.env.VITE_BACKEND_URL}/api/auth/google`,
                                     { token: idToken },
                                     { withCredentials: true }
                                 );

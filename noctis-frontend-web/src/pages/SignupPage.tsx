@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import.meta.env.VITE_BACKEND_URL
+
 axios.defaults.withCredentials = true;
 
 interface SignupPageProps {
@@ -34,7 +34,7 @@ function SignupPage({ setUser }: SignupPageProps) {
         setLoading(true);
         try {
             const res = await axios.post(
-                `${process.env.VITE_BACKEND_URL}/api/auth/register`,
+                `${import.meta.env.VITE_BACKEND_URL}/api/auth/register`,
                 { name, email, password },
                 { withCredentials: true }
             );
