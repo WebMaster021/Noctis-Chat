@@ -1,12 +1,13 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
 export interface IUser extends Document {
+    _id: mongoose.Types.ObjectId;
     name: string;
     email: string;
-    profilePhoto?: string;
+    profilePhoto: string;
     googleId?: string;
     password?: string;
-    description?: string;
+    description: string;
     createdAt: Date;
     updatedAt: Date;
 }

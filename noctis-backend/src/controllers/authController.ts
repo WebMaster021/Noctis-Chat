@@ -32,8 +32,8 @@ export const googleLogin = async (req: Request, res: Response) => {
                 profilePhoto: picture,
             });
         } else {
-            user.profilePhoto = picture;
-            user.name = name;
+            user.profilePhoto = picture ?? user.profilePhoto ?? "";
+            user.name = name ?? user.name;
             await user.save();
         }
 
