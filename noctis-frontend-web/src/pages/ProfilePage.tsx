@@ -201,6 +201,26 @@ const ProfilePage = ({ onLogout }: { onLogout: () => void }) => {
                     >
                         Logout
                     </button>
+                    <button
+                        onClick={async () => {
+                            if (!window.confirm("Are you sure you want to delete your account? This action cannot be undone.")) return;
+
+                            try {
+                                await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/users/delete`, {
+                                    withCredentials: true,
+                                });
+                                toast.success("Account deleted successfully.");
+                                onLogout();
+                            } catch (err) {
+                                console.error("Delete account error:", err);
+                                toast.error("Failed to delete account.");
+                            }
+                        }}
+                        className="bg-gray-700 hover:bg-red-700 px-4 py-2 rounded-md transition-colors"
+                    >
+                        Delete Account
+                    </button>
+
                 </div>
             </div>
         </div>

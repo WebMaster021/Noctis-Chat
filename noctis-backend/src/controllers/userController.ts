@@ -95,3 +95,21 @@ export const getPublicUserProfile = async (req: AuthRequest, res: Response) => {
     }
 };
 
+export const deleteUser = async (req: any, res: Response) => {
+    try {
+        const userId = req.user?.userId;
+        if (!userId) return res.status(401).json({ message: "Unauthorized" });
+
+        await User.findByIdAndDelete(userId);
+        res.clearCookie("token", {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "lax",
+        });
+
+        res.status(200).json({ message: "Account deleted successfully" });
+    } catch (err) {
+        console.error("Delete user error:", err);
+        res.status(500).json({ message: "Failed to delete account" });
+    }
+};

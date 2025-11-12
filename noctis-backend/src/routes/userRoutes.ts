@@ -1,6 +1,12 @@
 import express from "express";
 import { protect } from "../middlewares/authMiddleware";
-import { getUserProfile, updateUserProfile, changePassword, getPublicUserProfile } from "../controllers/userController";
+import {
+    getUserProfile,
+    updateUserProfile,
+    changePassword,
+    getPublicUserProfile,
+    deleteUser
+} from "../controllers/userController";
 import {User} from "../models/userModel";
 
 const router = express.Router();
@@ -19,5 +25,7 @@ router.get("/", protect, async (req, res) => {
 });
 
 router.get("/:id/public", protect, getPublicUserProfile);
+
+router.delete("/delete", protect, deleteUser);
 
 export default router;
